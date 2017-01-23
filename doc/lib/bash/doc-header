@@ -1,0 +1,17 @@
+#!/bin/bash
+set +u
+ENV_NAME=venv
+PWD_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Append directory to PATH.
+export PATH="${PWD_DIR}:$PATH"
+
+# cd to sphinx directory.
+cd "${PWD_DIR}/../../sphinx"
+
+# Commands.
+# -aE ~= no caching
+# -W = Turn warnings into errors (as is done on deployment).
+export SPHINX_BUILD_CMD='sphinx-build . _build -aEW'
+export HTML_MAKE_CMD='make html'
+export DOCTEST_CMD='make doctest'
