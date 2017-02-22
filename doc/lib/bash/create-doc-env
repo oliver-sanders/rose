@@ -18,7 +18,7 @@ function pickup-doc-env () {
 }
 
 
-if [[ $SPHINX_DEV_MODE == 0 ]]
+if [[ $SPHINX_DEV_MODE == 'true' ]]
 then
     # Development mode - Do not un-necessarily re-build the virtualenv
     if [[ -d $ENV_NAME ]]

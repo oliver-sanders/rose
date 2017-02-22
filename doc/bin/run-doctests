@@ -25,9 +25,9 @@
 #    there within, the installation of sphinx.
 #
 # ENVIRONMENT VARIABLES
-#    SPHINX_DEV_MODE=0|1
-#        If `0` then don't remove/re-build the sphinx virtual environment when
-#        this command is run.
+#    SPHINX_DEV_MODE=true|false
+#        If `true` then don't remove/re-build the sphinx virtual environment
+#        when this command is run.
 
 # Append ../lib/bash to PATH.
 export PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../lib/bash":${PATH}
