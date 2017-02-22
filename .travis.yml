@@ -4,7 +4,6 @@ before_install:
     - echo > "${HOME}/.bashrc"
     - virtualenv "${HOME}/virtualenv/rose"
     - echo "source \"${HOME}/virtualenv/rose/bin/activate\"" >> "${HOME}/.bashrc"
-    - echo "export PYTHONPATH=\"${PWD/lib/python}\"" >> "${HOME}/.bashrc"
     - source "${HOME}/.bashrc"
 
 install:
@@ -12,12 +11,7 @@ install:
     - pip install travis-sphinx
 
 script:
-    - echo "PYTHONPATH: ${PYTHONPATH}"
-    - source "${HOME}/.bashrc"
-    - echo "PYTHONPATH: ${PYTHONPATH}"
-    - python -c "import rose"
-    - python -c "import rose.config"
-    - travis-sphinx --source=doc/sphinx build
+    - PYTHONPATH="lib/python" travis-sphinx --source=doc/sphinx build
 
 after_success:
     - travis-sphinx deploy --pullrequests
