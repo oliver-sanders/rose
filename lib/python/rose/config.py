@@ -119,6 +119,7 @@ class ConfigNode(object):
     Nodes are stored hierarchically, for instance the following config
         [foo]
         bar = Bar
+
     When loaded by ConfigNode.load(file) would result in three levels of
     ConfigNodes, the first representing "root" (i.e. the top level of the
     config), one representing the config section "foo" and one representing the

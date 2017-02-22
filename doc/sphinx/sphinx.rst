@@ -115,34 +115,38 @@ doctest``, incorporated in the rose test battery).
 Use ``>>>`` for statements and ``...`` for continuation lines. Any return
 values will have to be provided and should sit on the next newline.
 
-.. code::
->>> import rose.config
->>> rose.config.ConfigNode()
-{'state': '', 'comments': [], 'value': {}}
+.. code-block:: python
+
+   >>> import rose.config
+   >>> rose.config.ConfigNode()
+   {'state': '', 'comments': [], 'value': {}}
 
 If return values are not known in advance use ellipses:
 
-.. code::
->>> import time
->>> print 'here', time.time(), 'there'
-here ... there
+.. code-block:: python
+
+   >>> import time
+   >>> print 'here', time.time(), 'there'
+   here ... there
 
 If return values are lengthy use ``NORMALIZE_WHITESPACE``:
 
-.. code::
->>> print [1,2,3] # doctest: +NORMALIZE_WHITESPACE
-[1,
-2,
-3]
+.. code-block:: python
+
+   >>> print [1,2,3] # doctest: +NORMALIZE_WHITESPACE
+   [1,
+   2,
+   3]
 
 Note that you can ONLY break a line on a comma i.e. this wont work (note the
 ``+SKIP`` directive prevents this doctest from being run):
 
-.. code::
->>> print {'a': {'b': {}}} # doctest: +NORMALIZE_WHITESPACE, +SKIP
-{'a':
-  {'b': {}
-}}
+.. code-block:: python
+
+   >>> print {'a': {'b': {}}} # doctest: +NORMALIZE_WHITESPACE, +SKIP
+   {'a':
+     {'b': {}
+   }}
 
 Doctests are performed in the doc/sphinx directory and any files created will
 have to be `tidied up
