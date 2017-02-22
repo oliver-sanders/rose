@@ -13,6 +13,8 @@ install:
 
 script:
     - echo "PYTHONPATH: ${PYTHONPATH}"
+    - source "${HOME}/.bashrc"
+    - echo "PYTHONPATH: ${PYTHONPATH}"
     - python -c "import rose"
     - python -c "import rose.config"
     - travis-sphinx --source=doc/sphinx build
