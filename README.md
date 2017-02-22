@@ -1,4 +1,4 @@
-# Rose
+# Ros
 
 [![Build Status](https://travis-ci.org/metomi/rose.svg?branch=master)](https://travis-ci.org/metomi/rose)
 [![DOI](https://zenodo.org/badge/6223866.svg)](https://zenodo.org/badge/latestdoi/6223866)
