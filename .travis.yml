@@ -6,6 +6,9 @@ before_install:
     - echo "source \"${HOME}/virtualenv/rose/bin/activate\"" >> ~/.bashrc
     - echo "export PYTHONPATH=\"${HOME/rose/lib/python}\""
     - source "${HOME}/.bashrc"
+    - ls "${HOME}"
+    - ls "${HOME}/rose"
+    - echo ${PYTHONPATH}
 
 install:
     - pip install sphinx
