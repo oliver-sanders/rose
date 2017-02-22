@@ -12,6 +12,9 @@ install:
     - pip install travis-sphinx
 
 script:
+    - echo "PYTHONPATH: ${PYTHONPATH}"
+    - python -c "import rose"
+    - python -c "import rose.config"
     - travis-sphinx --source=doc/sphinx build
 
 after_success:
