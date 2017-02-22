@@ -7,8 +7,8 @@ before_install:
     - echo "export PYTHONPATH=\"${HOME/rose/lib/python}\""
     - source "${HOME}/.bashrc"
     - ls "${HOME}"
-    - ls "${HOME}/rose"
     - echo ${PYTHONPATH}
+    - echo ${PWD}
 
 install:
     - pip install sphinx
