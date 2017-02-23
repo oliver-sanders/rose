@@ -14,4 +14,4 @@ script:
     - PYTHONPATH="lib/python" travis-sphinx --source=doc/sphinx build
 
 after_success:
-    - travis-sphinx --pullrequests deploy
+    - travis-sphinx --pullrequests --branches master,sphinx-build-test deploy
