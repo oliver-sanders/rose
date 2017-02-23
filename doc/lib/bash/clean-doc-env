@@ -3,7 +3,7 @@
 
 # Tidy up.
 deactivate >/dev/null
-if [[ ! SPHINX_DEV_MODE == 0 ]]
+if [[ ! $SPHINX_DEV_MODE == 'true' ]]
 then
     rm -rf $ENV_NAME >/dev/null
 fi

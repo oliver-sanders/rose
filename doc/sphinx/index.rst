@@ -9,11 +9,19 @@ Welcome to rose-api-doc's documentation!
 Contents:
 
 .. toctree::
+   :caption: Table of Contents
+   :name: mastertoc
    :maxdepth: 2
 
    config
    macro
 
+
+.. toctree::
+   :hidden:
+   :name: devtoc
+
+   sphinx
 
 
 Indices and tables

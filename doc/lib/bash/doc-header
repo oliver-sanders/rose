@@ -10,6 +10,8 @@ export PATH="${PWD_DIR}:$PATH"
 cd "${PWD_DIR}/../../sphinx"
 
 # Commands.
-export SPHINX_BUILD_CMD='sphinx-build -b html . _build'
+# -aE ~= no caching
+# -W = Turn warnings into errors (as is done on deployment).
+export SPHINX_BUILD_CMD='sphinx-build . _build -aEW'
 export HTML_MAKE_CMD='make html'
 export DOCTEST_CMD='make doctest'
