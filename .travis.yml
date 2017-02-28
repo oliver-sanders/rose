@@ -1,19 +1,24 @@
 language: python
 
 before_install:
+    # Create .bashrc file.
     - echo > "${HOME}/.bashrc"
     - virtualenv "${HOME}/virtualenv/rose"
     - echo "source \"${HOME}/virtualenv/rose/bin/activate\"" >> "${HOME}/.bashrc"
+    - echo "export PYTHONPATH=${PWD}/lib/python:${PYTHONPATH}" >> "${HOME}/.bashrc"
     - source "${HOME}/.bashrc"
 
 install:
     - pip install sphinx
-    - pip install travis-sphinx
 
 script:
-    - PYTHONPATH="lib/python" travis-sphinx --source=doc/sphinx --outdir=doc/sphinx/_build/html build
+    # Build Docs.
+    - sphinx-build -aEW 'doc/sphinx' 'doc/sphinx/_build'
+    - make -C 'doc/sphinx' html
 
 after_success:
-    - mkdir -p target/doc
-    - ln -s doc/ target/doc/build
-    - travis-sphinx --pullrequests --branches master,sphinx-build-test deploy
+    # Deploy Docs.
+    # TODO: Only deploy on merge.
+    - git clone 'https://github.com/davisp/ghp-import'
+    - ./ghp-import/ghp_import.py -n 'doc'
+    - git push -fq "https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git" gh-pages
