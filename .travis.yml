@@ -11,7 +11,7 @@ install:
     - pip install travis-sphinx
 
 script:
-    - PYTHONPATH="lib/python" travis-sphinx --source=doc/sphinx build
+    - PYTHONPATH="lib/python" travis-sphinx --source=doc/sphinx build --outdir target/doc/sphinx/build
 
 after_success:
     - travis-sphinx --pullrequests --branches master,sphinx-build-test deploy
