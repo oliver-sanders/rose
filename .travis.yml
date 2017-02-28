@@ -11,7 +11,8 @@ install:
 
 script:
     - # Build Docs.
-    - PYTHONPATH='lib/python' sphinx-build -aEW 'doc/sphinx' 'doc/sphinx/_build'
+    - PYTHONPATH='lib/python'
+    - sphinx-build -aEW 'doc/sphinx' 'doc/sphinx/_build'
     - make -C 'doc/sphinx' html
 
 after_success:
