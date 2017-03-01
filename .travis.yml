@@ -5,7 +5,7 @@ before_install:
     - echo > "${HOME}/.bashrc"
     - virtualenv "${HOME}/virtualenv/rose"
     - echo "source \"${HOME}/virtualenv/rose/bin/activate\"" >> "${HOME}/.bashrc"
-    - echo "export PYTHONPATH=lib/python:$PYTHONPATH" >> "${HOME}/.bashrc"
+    - echo "export PYTHONPATH=${PWD}/lib/python:${PYTHONPATH}" >> "${HOME}/.bashrc"
     - source "${HOME}/.bashrc"
 
 install:
