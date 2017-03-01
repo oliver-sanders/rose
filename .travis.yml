@@ -20,7 +20,12 @@ after_success:
     # Deploy Docs.
     # TODO: Only deploy on merge.
     - git clone 'https://github.com/davisp/ghp-import'
+
+    # Place docs in "doc" directory for historic reasons.
     - GHP_DIR="$(mktemp -d)"
     - ln -s "${PWD}/doc" "${GHP_DIR}/doc"
+    - ln 'index.html' "${GHP_DIR}/index.html"
+
+    # Push new documentation.
     - ./ghp-import/ghp_import.py -ln "${GHP_DIR}"
     - git push -fq "https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git" gh-pages
