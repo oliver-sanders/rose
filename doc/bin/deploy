@@ -4,6 +4,7 @@
 #if [[ "${TRAVIS_BRANCH}" != 'master' || \
 #      "${TRAVIS_PULL_REQUEST}" != 'false' ]]; then
 #    # Documention should not be deployed.
+#    echo 'Skipped Deployment.'
 #    exit 0
 #fi
 
