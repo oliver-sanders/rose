@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # Only deploy on merge to master.
-#if [[ "${TRAVIS_BRANCH}" != 'master' || \
-#      "${TRAVIS_PULL_REQUEST}" != 'false' ]]; then
-#    # Documention should not be deployed.
-#    echo 'Skipped Deployment.'
-#    exit 0
-#fi
+if [[ "${TRAVIS_BRANCH}" != 'master' || \
+      "${TRAVIS_PULL_REQUEST}" != 'false' ]]; then
+    # Documention should not be deployed.
+    echo 'Skipped Deployment.'
+    exit 0
+fi
 
 git clone 'https://github.com/davisp/ghp-import'
 
