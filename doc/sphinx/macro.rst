@@ -1,7 +1,7 @@
 Rose Macro API Reference
 =========================
 
-.. _Rose Reference Guide: http://www-nwp/~fcm/rose-doc/rose/rose-api.html#macro
+.. _Rose Reference Guide: ../../../rose-api.html#macro
 
 Macro Introduction
 ------------------

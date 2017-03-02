@@ -12,6 +12,6 @@ cd "${PWD_DIR}/../../sphinx"
 # Commands.
 # -aE ~= no caching
 # -W = Turn warnings into errors (as is done on deployment).
-export SPHINX_BUILD_CMD='sphinx-build . _build -aEW'
+export SPHINX_BUILD_CMD='rm -rf _build; sphinx-build . _build -aEW -b dummy'
 export HTML_MAKE_CMD='make html'
 export DOCTEST_CMD='make doctest'

@@ -34,7 +34,7 @@ reStructuredText
 ----------------
 
 Sphinx uses the `reStructuredText markup language
-<http://docutils.sourceforge.net/docs/user/rst/quickref.html>`_.
+<http://www.sphinx-doc.org/en/stable/rest.html>`_.
 
 It is sensitive to indentation and sometimes requires three-space indentation
 (e.g. often for lines following ``.. something::`` following lines should be
