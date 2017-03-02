@@ -1,0 +1,9 @@
+#!/bin/bash
+. "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"/doc-header
+
+# Tidy up.
+deactivate >/dev/null
+if [[ ! $SPHINX_DEV_MODE == 'true' ]]
+then
+    rm -rf $ENV_NAME >/dev/null
+fi

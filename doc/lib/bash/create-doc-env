@@ -1,0 +1,35 @@
+#!/bin/bash
+. "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"/doc-header
+
+function create-doc-env () {
+    # Remove any pre-existing virtual environment if present.
+    rm -rf $ENV_NAME >/dev/null
+
+    # Build virtual environment.
+    virtualenv --python=python2.7 $ENV_NAME
+    . $ENV_NAME/bin/activate
+    pip install sphinx
+    export PYTHONPATH="${ROSE_HOME}/lib/python"
+}
+
+function pickup-doc-env () {
+    . $ENV_NAME/bin/activate
+    export PYTHONPATH="${ROSE_HOME}/lib/python"
+}
+
+
+if [[ $SPHINX_DEV_MODE == 'true' ]]
+then
+    # Development mode - Do not un-necessarily re-build the virtualenv
+    if [[ -d $ENV_NAME ]]
+    then
+        # virtualenv exists - use it.
+        pickup-doc-env
+    else
+        # virtualenv does not exist - create it.
+        create-doc-env
+    fi
+else
+    # Normal mode, create/destroy the virtualenv with each execution.
+    create-doc-env
+fi
