@@ -24,8 +24,8 @@
 tests 4
 #-------------------------------------------------------------------------------
 TEST_KEY=${TEST_KEY_BASE}
-# export SPHINX_DEV_MODE=0  # For development, don't rebuild the virtualenv.
-run_pass ${TEST_KEY} ${ROSE_HOME}/doc/bin/run-doctests
+# export SPHINX_DEV_MODE=true  # For development, don't rebuild the virtualenv.
+run_pass ${TEST_KEY} make -C ${ROSE_HOME}/doc doctest
 file_grep ${TEST_KEY}-tests-setup "0 failures in setup code" ${TEST_KEY}.out
 file_grep ${TEST_KEY}-tests-run "0 failures in tests" ${TEST_KEY}.out
 file_grep ${TEST_KEY}-tests-clean "0 failures in cleanup code" ${TEST_KEY}.out

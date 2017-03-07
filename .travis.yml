@@ -42,7 +42,8 @@ install:
 
 script:
     # Build (and deploy if appropriate) Sphinx docs.
-    - sphinx-build -aEW 'doc/sphinx' 'doc/sphinx/_build' -b dummy && make -C 'doc/sphinx' html && doc/bin/deploy
+    #- sphinx-build -aEW 'doc/sphinx' 'doc/sphinx/_build' -b dummy && make -C 'doc/sphinx' html && doc/bin/deploy
+    - make -C doc doctest html && doc/scripts/deploy "${PWD}"
 
     # Standard tests.
     - rose test-battery --state=save -j 5 || (echo -e "\n\nRerunning Failed Tests...\n\n"; rose test-battery --state=save,failed -j 5)
