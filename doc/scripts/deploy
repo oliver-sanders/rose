@@ -1,0 +1,30 @@
+#!/bin/bash
+
+ROSE_DIR=$1
+
+# Only deploy on merge to master.
+#if [[ "${TRAVIS_BRANCH}" != 'master' || \
+#      "${TRAVIS_PULL_REQUEST}" != 'false' ]]; then
+#    # Documention should not be deployed.
+#    echo 'Skipped Deployment.'
+#    exit 0
+#fi
+
+git clone 'https://github.com/davisp/ghp-import'
+
+echo 'Deploying documentation ...'
+
+# Place docs in "doc" directory for historic reasons.
+echo -e '\tSymlinking documentation into site structure...'
+GHP_DIR="$(mktemp -d)"
+ln -s "${ROSE_DIR}/doc" "${GHP_DIR}/doc"
+ln 'index.html' "${GHP_DIR}/index.html"
+
+# Push new documentation.
+echo -e '\tConstructing gh-pages branch...'
+./ghp-import/ghp_import.py -ln "${GHP_DIR}"
+
+echo -e '\tpushing gh-pages branch...'
+git push -fq "https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git" gh-pages
+
+echo -e '\tDeployment successfull.'

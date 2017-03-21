@@ -1,0 +1,5 @@
+#!/bin/bash
+
+if [[ ! ${SPHINX_DEV_MODE} == 'true' ]]; then
+	echo 'sphinx-uninstall'
+fi

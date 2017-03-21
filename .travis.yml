@@ -5,19 +5,26 @@
 language: python
 
 before_install:
+    # Install cylc/fcm.
     - wget 'https://github.com/cylc/cylc/archive/master.tar.gz' -O '/tmp/cylc-master.tar.gz'
     - tar -xvf '/tmp/cylc-master.tar.gz' -C "${HOME}"
     - make -C "${HOME}/cylc-master" 'version'
     - wget 'https://github.com/metomi/fcm/archive/master.tar.gz' -O '/tmp/fcm-master.tar.gz'
     - tar -xvf '/tmp/fcm-master.tar.gz' -C "${HOME}"
     - cat >"${HOME}/.bashrc" <<<"export PATH=${PWD}/bin:${HOME}/fcm-master/bin:${HOME}/cylc-master/bin:\$PATH"
+
+    # Sphinx documentation builder.
+    #- virtualenv "${HOME}/virtualenv/rose"
+    #- echo "source \"${HOME}/virtualenv/rose/bin/activate\"" >> "${HOME}/.bashrc"
+    - echo "export PYTHONPATH=${PWD}/lib/python:${PYTHONPATH}" >> "${HOME}/.bashrc"
+
     - source "${HOME}/.bashrc"
+
     - ssh-keygen -t 'rsa' -f "${HOME}/.ssh/id_rsa" -N '' -q
     - cat "${HOME}/.ssh/id_rsa.pub" >>"${HOME}/.ssh/authorized_keys"
     - ssh-keyscan -t 'rsa' 'localhost' >>"${HOME}/.ssh/known_hosts"
 
-
-install: 
+install:
     - sudo apt-get install at build-essential gfortran heirloom-mailx pcregrep
     - sudo apt-get install -y libxml-parser-perl libconfig-inifiles-perl
     - sudo apt-get install -y libdbi-perl libdbd-sqlite3-perl
@@ -30,5 +37,13 @@ install:
     - sudo apt-get update
     - sudo apt-get install -y subversion
 
-script: 
+    # Sphinx documentation builder.
+    - pip install sphinx
+
+script:
+    # Build (and deploy if appropriate) Sphinx docs.
+    #- sphinx-build -aEW 'doc/sphinx' 'doc/sphinx/_build' -b dummy && make -C 'doc/sphinx' html && doc/bin/deploy
+    - make -C doc doctest html && doc/scripts/deploy "${PWD}"
+
+    # Standard tests.
     - rose test-battery --state=save -j 5 || (echo -e "\n\nRerunning Failed Tests...\n\n"; rose test-battery --state=save,failed -j 5)
