@@ -44,7 +44,13 @@ FAIL = 'not ok'
 
 
 def parse_version(version):
-    return tuple(int(x) for x in version.split('.'))
+    ret = []
+    for sub_version in version.split('.'):
+        try:
+            ret.append(int(sub_version))
+        except ValueError:
+            ret.append(sub_version)
+    return tuple(ret)
 
 
 def string_version(version_tuple):
