@@ -129,7 +129,7 @@ class CylcLexer(RegexLexer):
             (r'\w+', GRAPH_TASK_TOKEN),
             (r'\s', Text),
             (r'=>', Operator),
-            (r'[\&\|]', Operator),
+            (r'[\&\|\!]', Operator),
             (r'[\(\)]', Punctuation),
             (r'\[', Text, 'intercycle-offset'),
             (r'.', Comment)
@@ -220,8 +220,9 @@ class CylcLexer(RegexLexer):
         # Provides entry points for the other Jinja2 sections.
         'jinja2-openers': [
             (r'\{\{', Comment.Preproc, 'jinja2-inline'),
-            (r'\{#', Comment.Multi, 'jinja2-comment'),
             (r'\{\%', Comment.Preproc, 'jinja2-block'),
+            # Capture "{#" (jinja2) but not "${#" (bash).
+            (r'(?<!\$)\{#', Comment.Multi, 'jinja2-comment'),
         ],
 
         #  {# ... #}

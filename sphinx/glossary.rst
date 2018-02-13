@@ -95,8 +95,30 @@ Glossary
       task ``foo``. This means that the task ``bar`` will only run once the
       task ``foo`` has successfully completed.
 
+      See also:
+
+      * :term:`task trigger`
+
+   task trigger
+      :term:`Dependency <dependency>` relationships can be thought of the other
+      way around as "triggers".
+
+      For example the dependency ``foo => bar`` could be described in two ways:
+
+      * "``bar`` is dependent on ``foo``"
+      * "``foo`` is triggered by ``bar``"
+
+      In practice a trigger is the left-hand side of a dependency (``foo`` in
+      this example).
+
+      See also:
+
+      * :term:`dependency`
+      * :term:`qualifier`
+      * :term:`family trigger`
+
    cycle
-      In a :term:`cycling suite<cycling>` one cycle is one repitition of the
+      In a :term:`cycling suite<cycling>` one cycle is one repetition of the
       workflow.
 
       For example, in the following workflow each dotted box represents a cycle
@@ -204,6 +226,15 @@ Glossary
       See also:
 
       * :ref:`cylc tutorial <tutorial-datetime-cycling>`
+
+   wall-clock time
+      In a cylc suite the wall-clock time refers to the actual time (in the
+      real world).
+
+      See also:
+
+      * :term:`datetime cycling`
+      * :ref:`Clock Trigger Tutorial <tutorial-cylc-clock-trigger>`
 
    ISO8601
       ISO8601 is an international standard for writing dates and times which is
@@ -601,7 +632,34 @@ Glossary
 
       * `cylc user guide`_
       * :term:`family`
+      * :term:`task trigger`
       * :term:`dependency`
+      * :ref:`Family Trigger Tutorial <tutorial-cylc-family-triggers>`
+
+   stalled suite
+   stalled state
+      If cylc is unable to proceed running a workflow due to unmet dependencies
+      the suite is said to be *stalled*.
+
+      This usually happens because of a task failure as in the following
+      diagram:
+
+      .. digraph:: Example
+         :align: center
+
+         bgcolor = none
+
+         foo [style="filled" color="#ada5a5"]
+         bar [style="filled" color="#ff0000" fontcolor="white"]
+         baz [color="#88c6ff"]
+
+         foo -> bar -> baz
+
+      In this example the task ``bar`` has failed meaning that ``baz`` is unable
+      to run as its dependency (``bar:succeed``) has not been met.
+
+      When a cylc detects that a suite has stalled an email will be sent to the
+      user. Human interaction is required to escape a stalled state.
 
    rose app
    rose application configuration
