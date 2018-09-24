@@ -32,14 +32,5 @@ install:
     - sudo apt-get update
     - sudo apt-get install -y subversion
 
-script: skip
-
-jobs:
-    include:
-        - stage: test
-        - script: >
-            rose test-battery --state=save -j 5 ||
-            (echo -e "\n\nRerunning Failed Tests...\n\n";
-            rose test-battery -v --state=save,failed -j 5)
-        - script: >
-            rose make-docs --venv --dev --strict clean linkcheck doctest html slides latexpdf
+script: rose make-docs --venv --dev --strict clean linkcheck doctest html slides latexpdf
+after_failure: cat /tmp/sphinx-err-*
