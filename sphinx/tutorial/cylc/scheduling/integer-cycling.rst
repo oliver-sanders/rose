@@ -399,9 +399,18 @@ Recurrence Sections
 
    ``5/P3``
       Repeat every third cycle starting *from* cycle number 5.
+
+      .. code-block:: none
+
+         5, 8, 11, ...
+
    ``+P5/P3``
       Repeat every third cycle starting 5 cycles *after* the initial cycle
       point.
+
+      .. code-block:: none
+
+         6, 9, 12, ...  (for initial cycle point = 1)
 
    .. nextslide::
 

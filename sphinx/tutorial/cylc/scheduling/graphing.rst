@@ -47,10 +47,10 @@ The ``suite.rc`` File Format
        [[sub-section]]
            another-key = another-value  # Inline comment
            yet-another-key = """
-   A
-   Multi-line
-   String
-   """
+               A
+               Multi-line
+               String
+           """
 
 .. nextslide::
 
@@ -73,13 +73,13 @@ Throughout this tutorial we will refer to settings in the following format:
    .. code-block:: cylc
 
       [section]
-          key = value  # This setting belongs to the section.
+          foo = foot  # This setting belongs to the section.
           [[sub-section]]
-              key = value  # This setting belongs to the sub-section.
+              bar = pub  # This setting belongs to the sub-section.
 
           # This setting belongs to the sub-section as indentation is ignored.
           # Always write settings before defining any sub-sections!
-          key = value
+          baz = qux
 
 .. nextslide::
 

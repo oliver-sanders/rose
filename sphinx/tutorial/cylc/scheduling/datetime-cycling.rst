@@ -79,6 +79,16 @@ Date-Times
 
 .. nextslide::
 
+.. code-block:: none
+
+   1985-04-12T23:20
+   1985-04-12T23
+   1985-04-12
+   1985-04
+   1985
+
+.. nextslide::
+
 .. warning::
 
    The "basic" (purely numeric except for ``T``) and "extended" (written with
@@ -197,6 +207,8 @@ might produce different results for the recurrences.
 .. list-table::
    :class: grid-table
 
+   TODO - make this example fit on a slide, perhaps change to month / day
+
    * - .. code-block:: cylc
           :emphasize-lines: 2
 
@@ -253,10 +265,11 @@ The Initial & Final Cycle Points
 
 .. ifnotslides::
 
-   There are two special recurrences for the initial and final cycle points:
+   The ``^`` and ``$`` symbols are a special shorthand for referring to the
+   initial and final cycle points:
 
-* ``R1``: repeat once at the initial cycle point.
-* ``R1/P0Y``: repeat once at the final cycle point.
+* ``R/^``: repeat once at the initial cycle point.
+* ``R/$``: repeat once at the final cycle point.
 
 .. TODO - change terminology as done in the cylc user guide, "repeat" can be
    confusing. Use occur?
@@ -393,19 +406,19 @@ Putting It All Together
    size = "7,4"
 
    subgraph cluster_T00 {
-       label="+PT0H"
+       label="-PT6H"
        style="dashed"
        "observations.t00" [label="consolidate observations\n+PT0H"]
    }
 
    subgraph cluster_T03 {
-       label="+PT3H"
+       label="-PT3H"
        style="dashed"
        "observations.t03" [label="consolidate observations\n+PT3H"]
    }
 
    subgraph cluster_T06 {
-       label="+PT6H"
+       label="+PT0H"
        style="dashed"
        "forecast.t06" [label="forecast\n+PT6H"]
        "get_rainfall.t06" [label="get_rainfall\n+PT6H"]
