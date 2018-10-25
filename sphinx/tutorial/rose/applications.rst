@@ -170,7 +170,7 @@ An application can be run using the :ref:`command-rose-app-run` command:
 
       * The ``bin/forecast`` script.
       * The ``lib/python/util.py`` Python library.
-      * The ``lib/template/map.html`` HTML template.
+      * The ``lib/python/map.html`` HTML template.
 
       Rather than leaving these resources scattered throughout the
       :term:`suite directory` we can encapsulate them into the

@@ -87,7 +87,7 @@
             # Create the html map file in the task's log directory.
             MAP_FILE = "${CYLC_TASK_LOG_ROOT}-map.html"
             # The path to the template file used to generate the html map.
-            MAP_TEMPLATE = "$CYLC_SUITE_RUN_DIR/lib/template/map.html"
+            MAP_TEMPLATE = "$CYLC_SUITE_RUN_DIR/lib/python/map.html"
 
     [[post_process<site>]]
         # Generate a forecast for the location <site> 60 minutes in the future.
