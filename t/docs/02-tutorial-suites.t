@@ -59,8 +59,16 @@ for tutorial in $(ls -1 "${TUTORIALS_PATH}"); do
         continue
     fi
 done
+echo '------------------------------------------------------------------------'
+echo TESTS
+echo "${TESTS[@]}"
+echo TEST_KEYS
+echo "${TEST_KEYS[@]}"
+echo TUT_DIRS
+echo "${TUT_DIRS[@]}"
+echo '------------------------------------------------------------------------'
 tests $(( ( ${#TESTS[@]} - 1 ) * 2 ))
-#-------------------------------------------------------------------------------
+echo '------------------------------------------------------------------------'
 # Run the tests.
 export REG_BASE=$(mktemp -d --tmpdir="${HOME}/cylc-run" |xargs basename)
 for IND in $(seq 1 $(( ${#TEST_KEYS[@]} - 1 ))); do
