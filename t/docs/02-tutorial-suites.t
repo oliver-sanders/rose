@@ -70,6 +70,7 @@ echo '------------------------------------------------------------------------'
 tests $(( ( ${#TESTS[@]} - 1 ) * 2 ))
 echo '------------------------------------------------------------------------'
 # Run the tests.
+mkdir "${HOME}/cylc-run" -p
 export REG_BASE=$(mktemp -d --tmpdir="${HOME}/cylc-run" |xargs basename)
 for IND in $(seq 1 $(( ${#TEST_KEYS[@]} - 1 ))); do
     TEST_KEY="${TEST_KEY_BASE}-${TEST_KEYS[$IND]}"
