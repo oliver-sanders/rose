@@ -70,6 +70,8 @@ for IND in $(seq 1 $(( ${#TEST_KEYS[@]} - 1 ))); do
     export REG="${REG_BASE}/$(basename $TUT_DIR)"
     run_pass "${TEST_KEY}" bash -c "${TESTS[$IND]}"
     file_cmp "${TEST_KEY}.err" "${TEST_KEY}.err" /dev/null
+    cat "${TEST_KEY}.out" >&2
+    cat "${TEST_KEY}.err" >&2
 done
 rm -rf "${HOME}/cylc-run/${REG_BASE}"
 #-------------------------------------------------------------------------------
