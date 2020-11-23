@@ -70,4 +70,5 @@
 #     optional ROSE_META_PATH
 #         Prepend `$ROSE_META_PATH` to the metadata search path.
 #-------------------------------------------------------------------------------
-exec python3 -m metomi.rose.config_editor.main "$@"
+echo 'The Rose configuration editor has been removed, use the Cylc GUI.' >&2
+exit 1

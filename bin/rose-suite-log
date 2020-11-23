@@ -64,4 +64,5 @@
 #     --view
 #         Launch web browser to view suite log.
 #-------------------------------------------------------------------------------
-exec python3 -m metomi.rose.suite_log "$@"
+echo 'This command has been removed: use the Cylc GUI' >&2
+exit 1

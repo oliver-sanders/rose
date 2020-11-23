@@ -129,4 +129,5 @@
 #     * `cylc help register`
 #     * `cylc help run`
 #-------------------------------------------------------------------------------
-exec python3 -m metomi.rose.suite_run "$@"
+echo 'This command has been replaced by: "cylc install".' >&2
+exit 1

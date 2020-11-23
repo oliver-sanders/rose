@@ -50,4 +50,5 @@
 #     --verbose, -v
 #         Increment verbosity.
 #-------------------------------------------------------------------------------
-exec python3 -m metomi.rose.cmp_source_vc "$@"
+echo 'This command is awaiting re-implementation in Cylc8' >&2
+exit 1

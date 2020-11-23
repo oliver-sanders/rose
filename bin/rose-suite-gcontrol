@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #-------------------------------------------------------------------------------
-# Copyright (C) British Crown (Met Office) & Contributors.
+# Copyright (C) 2012-2019 British Crown (Met Office) & Contributors.
 #
 # This file is part of Rose, a framework for meteorological suites.
 #
@@ -18,7 +18,7 @@
 # along with Rose. If not, see <http://www.gnu.org/licenses/>.
 #-------------------------------------------------------------------------------
 # NAME
-#     rose suite-clean
+#     rose suite-gcontrol
 #
 # SYNOPSIS
 #     rose suite-clean [OPTIONS] [SUITE-NAME [...]]
@@ -40,7 +40,7 @@
 #         If one or more `--only=ITEM` option is specified, only files and/or
 #         directories matching an `ITEM` will be removed. An `ITEM` should be a
 #         glob pattern (bash extglob) for matching a relative path in the run
-#         directory of the suite(s).
+#         directory of the suite(s). 
 #     --quiet, -q
 #         Decrement verbosity.
 #     --verbose, -v
@@ -50,5 +50,4 @@
 #     Return the difference between the number of arguments and number of
 #     successfully cleaned suites, i.e. 0 if all successful.
 #-------------------------------------------------------------------------------
-echo 'This command has been replaced by: "cylc clean".' >&2
-exit 1
+echo 'This command has been removed: use the Cylc GUI.' >&2

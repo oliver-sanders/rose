@@ -55,4 +55,5 @@
 #     --verbose, -v
 #         Increment verbosity.
 #-------------------------------------------------------------------------------
-exec python3 -m metomi.rose.suite_restart "$@"
+echo 'This command has been replaced by: "cylc restart".' >&2
+exit 1

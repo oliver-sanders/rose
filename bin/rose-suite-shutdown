@@ -54,4 +54,5 @@
 #         See the cylc documentation, cylc shutdown for options and details on
 #         `EXTRA-ARGS`.
 #-------------------------------------------------------------------------------
-exec python3 -m metomi.rose.suite_control shutdown "$@"
+echo 'This command has been replaced by: "cylc stop".' >&2
+exit 1
