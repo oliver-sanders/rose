@@ -83,7 +83,7 @@ class BadChanges(Exception):
         return "\n".join([str(bad_change) for bad_change in bad_changes])
 
 
-class RosieSvnPreCommitHook(object):
+class RosieSvnPreCommitHook:
 
     """A pre-commit hook on a Rosie Subversion repository.
 

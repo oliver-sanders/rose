@@ -49,7 +49,7 @@ from metomi.rosie.db import (
     LATEST_TABLE_NAME, MAIN_TABLE_NAME, META_TABLE_NAME, OPTIONAL_TABLE_NAME)
 
 
-class RosieWriteDAO(object):
+class RosieWriteDAO:
 
     """Data Access Object for writing to the Rosie web service database."""
 
@@ -95,7 +95,7 @@ class RosieWriteDAO(object):
         self.connection.execute(statement)
 
 
-class RosieSvnPostCommitHook(object):
+class RosieSvnPostCommitHook:
 
     """A post-commit hook on a Rosie Subversion repository.
 
