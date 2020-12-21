@@ -32,10 +32,11 @@ from uuid import uuid4
 
 from metomi.rose.fs_util import FileSystemEvent
 from metomi.rose.popen import RosePopenError
-from metomi.rose.reporter import Event, Reporter
+from metomi.rose.reporter import Reporter
 from metomi.rose.suite_engine_proc import (
-    SuiteEngineProcessor, SuiteEngineGlobalConfCompatError,
-    SuiteNotRunningError, SuiteStillRunningError, TaskProps)
+    SuiteEngineProcessor,
+    TaskProps
+)
 
 
 class CylcProcessor(SuiteEngineProcessor):

@@ -19,9 +19,7 @@
 # -----------------------------------------------------------------------------
 """Suite engine processor management."""
 
-from glob import glob
 import os
-import pwd
 import re
 import sys
 
@@ -32,7 +30,6 @@ from metomi.rose.fs_util import FileSystemUtil
 from metomi.rose.host_select import HostSelector
 from metomi.rose.popen import RosePopener
 from metomi.rose.reporter import Event
-from metomi.rose.resource import ResourceLocator
 from metomi.rose.scheme_handler import SchemeHandlersManager
 
 
@@ -161,35 +158,6 @@ class ISOCycleOffset(BaseCycleOffset):
     def to_duration(self):
         """Convert to a Duration."""
         return self.duration
-
-
-class SuiteEngineGlobalConfCompatError(Exception):
-
-    """An exception raised on incompatible global configuration."""
-
-    def __str__(self):
-        engine, key, value = self.args
-        return ("%s global configuration incompatible to Rose: %s=%s" %
-                (engine, key, value))
-
-
-class SuiteNotRunningError(Exception):
-
-    """An exception raised when a suite is not running."""
-
-    def __str__(self):
-        return "%s: does not appear to be running" % (self.args)
-
-
-class SuiteStillRunningError(Exception):
-
-    """An exception raised when a suite is still running."""
-
-    FMT_HEAD = "Suite \"%(suite_name)s\" appears to be running:\n"
-
-    def __str__(self):
-        suite_name, extras = self.args
-        return self.FMT_HEAD % {"suite_name": suite_name} + "".join(extras)
 
 
 class CycleOffsetError(ValueError):
