@@ -46,7 +46,7 @@ class CylcProcessor(SuiteEngineProcessor):
     REC_CYCLE_TIME = re.compile(
         r"\A[\+\-]?\d+(?:W\d+)?(?:T\d+(?:Z|[+-]\d+)?)?\Z")  # Good enough?
     SCHEME = "cylc"
-    SUITE_CONF = "suite.rc"
+    SUITE_CONF = "flow.cylc"
     SUITE_NAME_ENV = "CYLC_SUITE_NAME"
     SUITE_DIR_REL_ROOT = "cylc-run"
     TASK_ID_DELIM = "."
