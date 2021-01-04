@@ -16,15 +16,17 @@
 # -----------------------------------------------------------------------------
 """Wraps Python's subprocess.Popen."""
 
-import os
 import asyncio
-import re
 import io
-from metomi.rose.reporter import Event
-from metomi.rose.resource import ResourceLocator
+import os
+import re
+import select
 import shlex
 from subprocess import Popen, PIPE
 import sys
+
+from metomi.rose.reporter import Event
+from metomi.rose.resource import ResourceLocator
 
 
 class RosePopenError(Exception):
@@ -68,15 +70,19 @@ class RosePopenEvent(Event):
             ret = RosePopener.list_to_shell_str(self.command)
         if isinstance(self.stdin, str):
             ret += " <<'__STDIN__'\n" + self.stdin + "\n'__STDIN__'"
+        elif isinstance(self.stdin, bytes):
+            ret += " <<'__STDIN__'\n" + self.stdin.decode() + "\n'__STDIN__'"
         elif isinstance(self.stdin, io.IOBase):
-            try:
-                # FIXME: Is this safe?
-                pos = self.stdin.tell()
-                ret += " <<'__STDIN__'\n" +\
-                       self.stdin.read() + "\n'__STDIN__'"
-                self.stdin.seek(pos)
-            except IOError:
-                pass
+            if select.select([self.stdin], [], [], 0.0)[0]:
+                try:
+                    # FIXME: Is this safe?
+                    self.stdin.writelines(['\n'])
+                    pos = self.stdin.tell()
+                    ret += " <<'__STDIN__'\n" +\
+                           self.stdin.read() + "\n'__STDIN__'"
+                    self.stdin.seek(pos)
+                except IOError:
+                    pass
         return ret
 
 
