@@ -194,7 +194,7 @@ class ConfigProcessorForFile(ConfigProcessorBase):
                         source.scheme = scheme
                         break
                 self.loc_handlers_manager.parse(source, conf_tree)
-            except ValueError as exc:
+            except ValueError:
                 if source.is_optional:
                     sources.pop(source.name)
                     for name in source.used_by_names:
