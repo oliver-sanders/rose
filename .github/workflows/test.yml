@@ -111,4 +111,7 @@ jobs:
 
       - name: Functional Tests
         run: |
+          etc/bin/rose-test-battery -j 1 -v \
+            t/rosa-svn-post-commit/00-basic.t \
+            t/rose-task-run/11-specify-cycle-iso.t
           etc/bin/rose-test-battery -j 4
