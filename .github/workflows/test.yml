@@ -12,14 +12,14 @@ on:
 jobs:
   test:
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 15
+    timeout-minutes: 35
     strategy:
       matrix:
         os: ['ubuntu-latest']
         python-version: ['3.7']
-        include:
-          - os: 'macos-latest'
-            python-version: '3.7'
+        #include:
+        #  - os: 'macos-latest'
+        #    python-version: '3.7'
 
     steps:
       - name: Checkout
@@ -55,19 +55,17 @@ jobs:
           patch "${hostuserutil}" < etc/conf/macos-patch
 
           # install system deps
-          brew update
+          #brew update
           brew install bash coreutils gnu-sed shellcheck sqlite3
-
-          # old stuff, not sure if all needed
-          brew install \
-            subversion
 
           # add GNU coreutils and sed to the user PATH
           # (see instructions in brew install output)
-          cat >> "$HOME/.bashrc" <<__HERE__
-          PATH="$(brew --prefix)/opt/coreutils/libexec/gnubin:$PATH"
-          PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
-          __HERE__
+          echo \
+            "$(brew --prefix)/opt/coreutils/libexec/gnubin" \
+            >> "${GITHUB_PATH}"
+          echo \
+            "/usr/local/opt/gnu-sed/libexec/gnubin" \
+            >> "${GITHUB_PATH}"
 
       - name: Apt-Get Install
         if: startsWith(matrix.os, 'ubuntu')
