@@ -12,14 +12,14 @@ on:
 jobs:
   test:
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 35
+    timeout-minutes: 45
     strategy:
       matrix:
         os: ['ubuntu-latest']
         python-version: ['3.7']
-        #include:
-        #  - os: 'macos-latest'
-        #    python-version: '3.7'
+        include:
+          - os: 'macos-latest'
+            python-version: '3.7'
 
     steps:
       - name: Checkout
@@ -101,6 +101,7 @@ jobs:
           pytest
 
       - name: Functional Tests
+        timeout-minutes: 30
         id: functest
         run: |
           etc/bin/rose-test-battery -j 4 --state=save
