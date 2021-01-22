@@ -74,5 +74,7 @@ else
         NPROC=$(python3 -c \
             'import multiprocessing; print(multiprocessing.cpu_count())')
     fi
-    exec prove -j "$NPROC" -s -r "${@:-t}"
+    # TODO: reinstate the -s opt
+    exec prove -j "$NPROC" -r "${@:-t}"
+    #exec prove -j "$NPROC" -s -r "${@:-t}"
 fi
