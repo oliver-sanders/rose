@@ -150,10 +150,62 @@ jobs:
           pytest
 
       - name: Functional Tests
-        timeout-minutes: 30
+        #timeout-minutes: 30
+        timeout-minutes: 50
         id: functest
         working-directory: rose
         run: |
+          etc/bin/rose-test-battery -j 1 -v \
+            ./t/docs/01-doctest.t \
+            ./t/rosa-svn-post-commit/01-mail-passwd.t \
+            ./t/rosa-svn-post-commit/03-unicode.t \
+            ./t/rose-ana/00-run-basic.t \
+            ./t/rose-ana/01-run-basic-v1.t \
+            ./t/rose-app-run/01-basic.t \
+            ./t/rose-app-run/05-file.t \
+            ./t/rose-app-run/11-file-incr-2.t \
+            ./t/rose-app-run/13-file-source-tilde.t \
+            ./t/rose-app-run/15-file-permission.t \
+            ./t/rose-app-run/18-access-mode-change.t \
+            ./t/rose-app-run/26-define-overrides.t \
+            ./t/rose-app-upgrade/01-upgrade-basic.t \
+            ./t/rose-app-upgrade/02-downgrade-basic.t \
+            ./t/rose-app-upgrade/07-add-existing.t \
+            ./t/rose-app-upgrade/09-opt.t \
+            ./t/rose-env-cat/01-basic.t \
+            ./t/rose-macro/02-value-type-check-err.t \
+            ./t/rose-macro/04-value-range-check-err.t \
+            ./t/rose-macro/08-compulsory-check.t \
+            ./t/rose-macro/10-trigger-check.t \
+            ./t/rose-macro/11-trigger-change.t \
+            ./t/rose-macro/12-custom-change.t \
+            ./t/rose-macro/14-duplicate-check.t \
+            ./t/rose-macro/24-optional-config-name.t \
+            ./t/rose-metadata-check/01-type-length.t \
+            ./t/rose-metadata-check/07-trigger.t \
+            ./t/rose-metadata-check/08-duplicate.t \
+            ./t/rose-metadata-check/11-invalid-settings.t \
+            ./t/rose-mpi-launch/01-command-inner.t \
+            ./t/rose-mpi-launch/02-file.t \
+            ./t/rose-task-run/02-env-basic.t \
+            ./t/rose-task-run/04-run-path-empty.t \
+            ./t/rose-task-run/07-app-arch.t \
+            ./t/rose-task-run/09-app-prune-work.t \
+            ./t/rose-task-run/13-app-arch-cmd-out.t \
+            ./t/rose-task-run/14-app-prune-remove.t \
+            ./t/rose-task-run/26-app-fcm-make-new-mode-with-cont.t \
+            ./t/rose-task-run/37-app-bunch-rm-old.t \
+            ./t/rose-task-run/40-app-arch-duplicate.t \
+            ./t/rose.c3/00-self.t \
+            ./t/rose.env/00-export.t \
+            ./t/rosie-create/01-suite-info-meta.t \
+            ./t/rosie-delete/00-basic.t \
+            ./t/rosie-lookup/00-basic.t \
+            ./t/rosie-lookup/01-multi.t \
+            ./t/rosie-lookup/02-unicode.t \
+            ./t/rosie-ls/00-basic.t \
+            ./t/rosie-ls/01-many.t
+
           # rose tests should pass first time around
           etc/bin/rose-test-battery -j 4 --state=save
 
