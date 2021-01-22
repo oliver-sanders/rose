@@ -79,7 +79,7 @@ jobs:
 
           # install system deps
           #brew update
-          brew install bash coreutils gnu-sed shellcheck sqlite3
+          brew install bash coreutils gnu-sed shellcheck sqlite3 subversion
 
           # add GNU coreutils and sed to the user PATH (for actions steps)
           # (see instructions in brew install output)
@@ -113,13 +113,6 @@ jobs:
       - name: Install FCM
         if: startsWith(matrix.os, 'ubuntu')
         run: |
-          # prepend FCM bin to $PATH
-          FCM_PATH="$GITHUB_WORKSPACE/fcm/bin"
-          # the github actions way (needed for cylc jobs)
-          echo "$FCM_PATH" >> "${GITHUB_PATH}"
-          # the bashrc wat (needed for subsequent gh action steps)
-          echo "export PATH=\"$FCM_PATH:\$PATH\"" >> "$HOME/.bashrc"
-
           # install FCM deps
           sudo apt-get install -y \
             subversion \
@@ -136,6 +129,19 @@ jobs:
             >> /etc/apt/sources.list.d/subversion19.list'
           sudo wget -q http://opensource.wandisco.com/wandisco-debian.gpg -O- \
             | sudo apt-key add -
+
+          # prepend FCM bin to $PATH
+          FCM_PATH="$GITHUB_WORKSPACE/fcm/bin"
+          # the github actions way (needed for cylc jobs)
+          echo "$FCM_PATH" >> "${GITHUB_PATH}"
+          # the bashrc wat (needed for subsequent gh action steps)
+          echo "export PATH=\"$FCM_PATH:\$PATH\"" >> "$HOME/.bashrc"
+
+          # test FCM installation
+          ls $FCM_PATH || true
+          which fcm || true
+          fcm --version || true
+          fcm help make
 
       - name: Style
         working-directory: rose
