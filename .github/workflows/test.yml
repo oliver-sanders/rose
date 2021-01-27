@@ -89,6 +89,8 @@ jobs:
           cat >> "$HOME/.bashrc" <<__HERE__
           PATH="$(brew --prefix)/opt/coreutils/libexec/gnubin:$PATH"
           PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+          # see NOTE in t/rosie-lookup/00-basic.t
+          export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
           __HERE__
 
       - name: Apt-Get Install
@@ -154,6 +156,8 @@ jobs:
         timeout-minutes: 30
         id: functest
         working-directory: rose
+        env:
+          OBJC_DISABLE_INITIALIZE_FORK_SAFETY: YES
         run: |
           etc/bin/rose-test-battery -j 1 -v \
             t/rosie-lookup/00-basic.t \
@@ -163,12 +167,16 @@ jobs:
             t/rosie-create/01-suite-info-meta.t \
             t/rosie-delete/00-basic.t
 
+          echo -e '\n\n\nMAIN RUN\n\n\n'
+
           # rose tests should pass first time around
           etc/bin/rose-test-battery -j 4 --state=save
 
       - name: Re-Run Fails
         if: failure() && steps.functest.outcome == 'failure'
         working-directory: rose
+        env:
+          OBJC_DISABLE_INITIALIZE_FORK_SAFETY: YES
         run: |
           # so we only re-run for debug purposes
           cylc scan --state=all --color=never
