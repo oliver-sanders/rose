@@ -160,16 +160,6 @@ jobs:
         env:
           OBJC_DISABLE_INITIALIZE_FORK_SAFETY: YES
         run: |
-          etc/bin/rose-test-battery -j 1 -v \
-            t/rosie-lookup/00-basic.t \
-            t/rosie-lookup/01-multi.t \
-            t/rosie-lookup/02-unicode.t \
-            t/rosie-ls/00-basic.t \
-            t/rosie-create/01-suite-info-meta.t \
-            t/rosie-delete/00-basic.t
-
-          echo -e '\n\n\nMAIN RUN\n\n\n'
-
           # rose tests should pass first time around
           etc/bin/rose-test-battery -j 4 --state=save
 
