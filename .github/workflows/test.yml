@@ -56,23 +56,9 @@ jobs:
           cylc_branch='cylc-install'
           pip install "git+https://github.com/$cylc_repo@$cylc_branch"
 
-      - name: Install Rose
-        working-directory: rose
-        run: |
-          pip install ."[all]"
-          pip install --no-deps git+https://github.com/cylc/cylc-rose.git
-          yarn install
-
       - name: Brew Install
         if: startsWith(matrix.os, 'macos')
         run: |
-          # apply DNS patch
-          hostuserutil="$(python3 -c '
-          import cylc.flow.hostuserutil
-          print(cylc.flow.hostuserutil.__file__)
-          ')"
-          patch "${hostuserutil}" < rose/etc/conf/macos-patch
-
           # install system deps
           #brew update
           brew install bash coreutils gnu-sed shellcheck sqlite3 subversion
@@ -90,6 +76,7 @@ jobs:
           cat >> "$HOME/.bashrc" <<__HERE__
           PATH="/usr/local/opt/coreutils/libexec/gnubin:\$PATH"
           PATH="/usr/local/opt/gnu-sed/libexec/gnubin:\$PATH"
+          export PATH
           # see NOTE in t/rosie-lookup/00-basic.t
           export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
           __HERE__
@@ -100,6 +87,23 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y shellcheck sqlite3 at
+
+      - name: MacOS DNS Patch
+        if: startsWith(matrix.os, 'macos')
+        run: |
+          # apply DNS patch
+          hostuserutil="$(python3 -c '
+          import cylc.flow.hostuserutil
+          print(cylc.flow.hostuserutil.__file__)
+          ')"
+          patch "${hostuserutil}" < rose/etc/conf/macos-patch
+
+      - name: Install Rose
+        working-directory: rose
+        run: |
+          pip install ."[all]"
+          pip install --no-deps git+https://github.com/cylc/cylc-rose.git
+          yarn install
 
       - name: Checkout FCM
         if: startsWith(matrix.os, 'ubuntu')
