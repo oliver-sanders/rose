@@ -88,11 +88,14 @@ jobs:
 
           # add GNU coreutils and sed to the user PATH (for Cylc jobs)
           cat >> "$HOME/.bashrc" <<__HERE__
+
           PATH="$(brew --prefix)/opt/coreutils/libexec/gnubin:$PATH"
           PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+          export PATH
           # see NOTE in t/rosie-lookup/00-basic.t
           export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
           __HERE__
+          cat "$HOME/.bashrc"
 
       - name: Apt-Get Install
         if: startsWith(matrix.os, 'ubuntu')
