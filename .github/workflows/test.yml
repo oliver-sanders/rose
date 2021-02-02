@@ -51,9 +51,6 @@ jobs:
           cylc_repo: ${{ github.events.inputs.cylc-repo || 'cylc/cylc-flow' }}
           cylc_branch: ${{ github.events.inputs.cylc-ref || 'master' }}
         run: |
-          # temp: use cylc-install branch
-          cylc_repo='datamel/cylc-flow'
-          cylc_branch='cylc-install'
           pip install "git+https://github.com/$cylc_repo@$cylc_branch"
 
       - name: Brew Install
