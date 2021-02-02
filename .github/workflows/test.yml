@@ -20,6 +20,9 @@ on:
         description: The Cylc repo to test against
         required: false
 
+defaults:
+  run:
+    shell: bash  # macos default shell is zsh
 
 jobs:
   test:
@@ -56,6 +59,7 @@ jobs:
       - name: Brew Install
         if: startsWith(matrix.os, 'macos')
         run: |
+          which python
           # install system deps
           #brew update
           brew install bash coreutils gnu-sed shellcheck sqlite3 subversion
@@ -79,6 +83,12 @@ jobs:
           export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
           __HERE__
           cat "$HOME/.bashrc"
+          which python
+
+      - name: Brew Install post
+        if: startsWith(matrix.os, 'macos')
+        run: |
+          which python
 
       - name: Apt-Get Install
         if: startsWith(matrix.os, 'ubuntu')
