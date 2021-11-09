@@ -26,6 +26,9 @@ from metomi.rose import (
     __file__ as rose_init_file,
     __version__,
 )
+from metomi.rose.scripts import (
+    __file__ as script_init_file,
+)
 
 
 USAGE = f'''
@@ -143,16 +146,13 @@ def exec_sub_cmd(ns, sub_cmd, args):
 
 
 def _exec_bash(ns, sub_cmd, args):
-    bash_file = Path(
-        rose_init_file
+    script_file = Path(
+        script_init_file,
     ).parent.joinpath(
-        '../',
-        '../',
-        'bin',
         f'{ns}-{sub_cmd}',
     ).resolve()
     os.execv(
-        bash_file,
+        script_file,
         ['bash', *args]  # note the first argument is ignored
     )
     sys.exit(0)
@@ -258,8 +258,7 @@ def _doc(ns):
         print('==================================================\n')
         from subprocess import Popen, PIPE, DEVNULL
         proc = Popen(
-            [ns + '2', sub_cmd, '--help'],
-            # [ns, sub_cmd, '--help'], TODO
+            [ns, sub_cmd, '--help'],
             stdin=DEVNULL,
             stdout=PIPE,
             text=True
