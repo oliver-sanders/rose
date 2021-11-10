@@ -852,6 +852,7 @@ ENVIRONMENT VARIABLES
 
 def main():
     """Run rose upgrade."""
+    metomi.rose.macro.add_meta_paths()
     return_objects = parse_upgrade_args()
     if return_objects is None:
         sys.exit(1)
@@ -957,8 +958,3 @@ def main():
             opts.non_interactive,
             reporter,
         )
-
-
-if __name__ == "__main__":
-    metomi.rose.macro.add_meta_paths()
-    main()
