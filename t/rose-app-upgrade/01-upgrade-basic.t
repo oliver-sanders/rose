@@ -318,6 +318,8 @@ meta=test-app-upgrade/0.5
 [env]
 Z=1
 __CONFIG__
+cp -r ../config ~/rose/test1/config
+cp -r ../rose-meta ~/rose/test1/rose-meta
 run_pass "$TEST_KEY" rose app-upgrade -y \
  --meta-path=../rose-meta/ -C ../config/ 0.5.1
 file_cmp "$TEST_KEY.out" "$TEST_KEY.out" <<'__OUTPUT__'

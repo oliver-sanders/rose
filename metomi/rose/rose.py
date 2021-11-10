@@ -162,9 +162,8 @@ def _exec_python(ns, sub_cmd, entry_point, args):
     # load the entry point
     fcn = entry_point.load()
 
-    # sys.argv = [ns, sub_cmd, *args]
+    # set the argv for the sub command
     sys.argv = [f'{ns}-{sub_cmd}', *args]
-    # sys.argv = args
 
     # run the entry point
     if signature(fcn).parameters:
@@ -195,7 +194,7 @@ def get_arg_parser(description, sub_cmds):
         dest='help_'
     )
     parser.add_argument(
-        '--version', '-V',
+        '--version',
         action='store_true',
         default=False,
         dest='version'
@@ -301,7 +300,8 @@ def main(ns, desc):
 
     if sub_cmd in ('help', 'h', '?'):
         try:
-            _help(ns, sub_cmd=cmd_args[0])
+            ns, sub_cmd = _check_aliases(ns, cmd_args[0])
+            _help(ns, sub_cmd=sub_cmd)
         except IndexError:
             _help(ns, parser)
 
