@@ -373,6 +373,7 @@ class RosePopener:
             else:
                 command = ' '.join(map(shlex.quote, args))
                 proc = await asyncio.create_subprocess_shell(command, **kwargs)
+                await proc.communicate()
         except OSError as exc:
             if exc.filename is None and args:
                 exc.filename = args[0]
