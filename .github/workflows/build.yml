@@ -47,6 +47,7 @@ jobs:
           cache-environment: true
           post-cleanup: 'all'
           environment-name: rose-build
+          init-shell: bash
           create-args: >-
             python=${{ matrix.python }}
             gtk3>=3.24.43
