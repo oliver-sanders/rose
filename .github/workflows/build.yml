@@ -55,6 +55,8 @@ jobs:
 
       - name: Build
         uses: cylc/release-actions/build-python-package@v1
+        with:
+          optional-deps: '[graph,edit,rosa]'
 
       - name: Inspect
         run: |
