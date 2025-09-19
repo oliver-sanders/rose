@@ -40,7 +40,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
 
-      - name: Configure Python
+      # install system dependencies ONLY
+      - name: Install System Dependencies
         uses: mamba-org/setup-micromamba@v2
         with:
           cache-environment: true
@@ -48,6 +49,8 @@ jobs:
           environment-name: rose-build
           create-args: >-
             python=${{ matrix.python }}
+            gtk3>=3.24.43
+            cairo
 
       - name: Build
         uses: cylc/release-actions/build-python-package@v1
